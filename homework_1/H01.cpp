@@ -18,7 +18,6 @@ public:
 	Student();
 	Student(string, string, int, int[]);
 	// Accessor Functions
-
 	string getfirstname()
 	{
 		return firstname;
@@ -48,7 +47,6 @@ Student::Student()
 	}
 }
 // Constructor
-
 Student::Student(string first, string last, int count, int new_grades[])
 {
 	firstname = first;
@@ -60,7 +58,6 @@ Student::Student(string first, string last, int count, int new_grades[])
 	}
 }
 // This function will print out the grades of a student when called
-
 void Student::showGrades(int numGrades)
 {
 	for (int i = 0; i < numGrades; i++)
@@ -126,31 +123,15 @@ int main()
 void loadClassList(vector<Student> & list)
 
 {
-
 	// Create an ifstream object and open the file
-
 	ifstream inputfile;
-
 	inputfile.open("input.txt");
-
-
-
 	// Initialize variables
-
 	string first;
-
 	string last;
-
 	int grades[20];
-
 	int count = 0;
-
-
-
 	inputfile >> first;
-
-
-
 	// Store data into the vector until end of file is reached
 
 	while (!inputfile.eof())
