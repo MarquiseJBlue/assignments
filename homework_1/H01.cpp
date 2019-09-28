@@ -1,195 +1,148 @@
+/*Marquise Blue
+CMPS 1063 9/26/2019
+Inputting data of students into the program, and printing it onto the screen
+
+*/
 #include <iostream>
 #include <string>
-#include <fstream>
+#include< fstream>
 #include <vector>
 #include <iomanip>
+
 using namespace std;
 
 class Student
 {
 private:
-	string firstname;
-	string lastname;
+	string fname;
+	string lname;
 	int numGrades;
 	int grades[10];
 
+
+
 public:
-	// Function Prototypes
+	//function prototypes
 	Student();
 	Student(string, string, int, int[]);
-	// Accessor Functions
-	string getfirstname()
+
+	string getfname()
 	{
-		return firstname;
+		return fname;
 	}
-	string getlastname()
+	string getlname()
 	{
-		return lastname;
+		return lname;
 	}
-	int getnumGrades()
-	{
+	int getnumGrades() {
 		return numGrades;
 	}
-
-	void showGrades(int);
+	void showGrades(int, ofstream&);
 };
-
-// Default Constructor
 
 Student::Student()
 {
-	firstname = "";
-	lastname = "";
+	fname = " ";
+	lname = " ";
 	numGrades = 0;
 	for (int i = 0; i < 10; i++)
 	{
 		grades[i] = 0;
 	}
 }
-// Constructor
-Student::Student(string first, string last, int count, int new_grades[])
+
+//constructor
+Student::Student(string first, string last, int count, int newGrades[])
 {
-	firstname = first;
-	lastname = last;
+	fname = first;
+	lname = last;
 	numGrades = count;
+
 	for (int i = 0; i < numGrades; i++)
 	{
-		grades[i] = new_grades[i];
+		grades[i] = newGrades[i];
 	}
+
 }
-// This function will print out the grades of a student when called
-void Student::showGrades(int numGrades)
+
+void Student::showGrades(int numGrades, ofstream& outfile)
 {
 	for (int i = 0; i < numGrades; i++)
 	{
-		cout << grades[i] << " ";
-
+		outfile << grades[i] << " ";
 	}
-
-	cout << endl;
 }
-// Function Prototypes
-void loadClassList(vector<Student> &);
-void printClassList(Student, int);
+
+void loadClassList(vector<Student>&);
+
+void printClassList(Student, int, ofstream&);
 
 int main()
 {
-	// Create a vector to hold the students
+	ofstream outfile;
+	outfile.open("output.txt");
 
-	vector<Student> ClassList;
+	//Creating a vector to hold the students
+	vector<Student>(classList);
 
-
-
-	// Load the data from the input file into the vector
-
-	loadClassList(ClassList);
-
-
-
-	// Used to print out student number
-
+	//Load the data from the input file into the vector
+	loadClassList(classList);
 	int counter = 1;
 
-
-
-	// Print out a list of the students and their grades
-
-	for (int i = 0; i < ClassList.size(); i++)
-
+	//Print out a list of the studetns and their grades
+	for (int i = 0; i < classList.size(); i++)
 	{
-
-		printClassList(ClassList[i], counter);
-
+		printClassList(classList[i], counter, outfile);
 		counter++;
-
 	}
 
-
-
-	// Pause the screen so user can read output
-
+	//pause the screen so user can read output
 	system("pause");
-
 	return 0;
-
 }
 
-
-
-// This function loads the data from an input file into 
-
-// the program and then stores it into the vector of objects
-
-void loadClassList(vector<Student> & list)
-
+void loadClassList(vector<Student>&list)
 {
-	// Create an ifstream object and open the file
-	ifstream inputfile;
-	inputfile.open("input.txt");
-	// Initialize variables
-	string first;
-	string last;
-	int grades[20];
+	//creating a ifstream object to open the file
+	ifstream infile;
+	infile.open("input_data.txt");
+
+	//initializing the variables
+	string first; string last;
+	int grades[10];
 	int count = 0;
-	inputfile >> first;
-	// Store data into the vector until end of file is reached
-
-	while (!inputfile.eof())
-
+	infile >> first;
+	
+	//strore data into the vecor until end of file is reached
+	while (!infile.eof())
 	{
-
-		inputfile >> last;
-
-		inputfile >> count;
-
+		infile >> last >> count;
 		for (int i = 0; i < count; i++)
-
 		{
-
-			inputfile >> grades[i];
-
+			infile >> grades[i];
 		}
-
-
-
-		Student NewStudent = Student(first, last, count, grades);
-
-		list.push_back(NewStudent);
-
-		inputfile >> first;
-
+		Student newStudent = Student(first, last, count, grades);
+		list.push_back(newStudent);
+		infile >> first;
 	}
-
-
-
-
-
 }
 
-
-
-// This function prints out each student along with their grades
-
-void printClassList(Student stu, int counter)
+//printing off the students and their grades
+void printClassList(Student stu, int counter, ofstream& outfile)
 {
 	int numGrades = 0;
-	// Header for table
-
 	if (counter == 1)
-
 	{
-		cout << "Students" << endl;
-		cout << "=======================================\n";
+		outfile << "Students" << endl;
+		outfile << "===================================" << endl;
 	}
-	// Make a string that will hold a student's full name
 
-	string first = stu.getfirstname();
-	string last = stu.getlastname();
-	string fullname = first + " " + last;
+	//make a string that will hold a students full name
+	string first = stu.getfname();
+	string last = stu.getlname();
 
-	// Print out the student's name 
-
-	cout << left << counter << ". " << setw(18) << fullname << ": ";
+	outfile << left << counter << " . " << setw(18) << first << " " << last << ": ";
 	numGrades = stu.getnumGrades();
-	stu.showGrades(numGrades);
+	stu.showGrades(numGrades, outfile);
+	outfile << endl;
 }
