@@ -1,3 +1,20 @@
+//////////////////////////////////////////////////////////////////////////
+// Author:          MARQUISE BLUE
+// Assignment:       Program_04
+// Date:             22 November 2019
+// Title:            Program 4-Caeser Cipher decrypting
+// Semester:         Spring 2019
+// Course:           CMPS 1063 
+// 
+// Files:           cipher.cpp 
+//                 decrypted.txt
+//		   encrypted.txt
+// Description:
+//					this program will infile a encrypted message 
+//					to decrypt the message using classes and send it 
+//					to the screen
+//////////////////////////////////////////////////////////////////////////
+
 #include <iostream>
 #include <fstream>
 #include <string>
