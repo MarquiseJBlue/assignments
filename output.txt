@@ -1,0 +1,26 @@
+Marquise Blue
+CMPS 1063
+12/10/2019
+
+Blackjack
+----------
+Welcome to Blackjack
+_______
+Press Enter to get your first two selections
+
+card 1: 4
+Card 2: 3
+Card Total: 7
+
+Do you want to hit or stay
+hit
+
+Welcome to Blackjack
+_______
+Card 1: 4
+Card 2: 3
+Card 3: 10
+Card 4: 0
+
+Your card total is: 17
+Press any key to continue . . .
